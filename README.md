@@ -54,6 +54,7 @@ Always use Array<> when defining arrays for your UBO client side, whether they'r
  ## Examples
  Here's an example use case:
  
+```c++
 struct DirectionalLight : public UBOStruct<>
 {
     std140::vec3 direction;
@@ -67,6 +68,8 @@ struct DirectionalLightUBO : public UBOStruct<>
     std140::int32_t nDirectionalLights = 0;
     std140::Array<DirectionalLight, MAX_DIRECTIONAL_LIGHTS> directionalLights;
 };
+
+```
 
 So in our application code we can just memcpy into a mapped buffer all of these structures without having to worry about individual member offsets
 Included alongside this header is main.cpp which has a series of unit tests verifying that the offsets match between the client and GLSL program for a variety of structure layouts.
