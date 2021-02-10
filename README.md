@@ -1,6 +1,9 @@
 # GL_UBO
 Header only library for declaring UBO structures in client C++ code with correct alignment layouts
 
+## Unit Test
+Run CMakeLists.txt to make a test application that builds a bunch of sample shaders and compares the offsets of each member with the offsets in the client C++ Code.
+
 ## Std140.h
 This header defines types you can use to define UBO's in the std140 memory layout in the client code.
 This is desirable so you can operate on UBO's client side, and easily update the GPU buffer memory either with persistent mapped buffers, or memcpy into a mapped buffer, or BufferSubData, etc.
