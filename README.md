@@ -14,27 +14,34 @@ To facilitate this we define in namespace std140 aligned data types
 
 ### Primitive Types
 We have primitive types that just map to the corresponding OpenGL typedefs
+```c++
     double64_t; 
     bool32_t;
     int32_t;
     uint32_t;
     float32_t
+```    
+    
     
 ### Vector Types
 There are the vector types you'd expect from GLSL as well
+```c++
      vec2,vec3,vec4    (float)
      uvec2,uvec3,uvec4 (uint)
      dvec2,dvec3,dvec4 (double)
      ivec2,ivec3,ivec4 (int)
      bvec2,bvec3,bvec4 (bool)
+```
 
 We use std::array as the base type for our glsl vectors client side
 
 ### Matrix Types
 There are also the GLSL Matrix types
+```c++
  mat2,mat3,mat4, dmat2,dmat3,dmat4
  mat2x3,mat2x4,mat3x2,mat3x4,mat4x2,mat4x3
  dmat2x3,dmat2x4,dmat3x2,dmat3x4,dmat4x2,dmat4x3
+```
 
 ### Arrays
 std140 has interesting alignment rules for arrays, so we define Array<type,length>
