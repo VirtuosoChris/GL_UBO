@@ -49,6 +49,22 @@ namespace Virtuoso
 
                 std::string compileLog = rval.GetInfoLog();
 
+                if (rval.Get(GL_COMPILE_STATUS) == GL_FALSE)
+                {
+                    switch (shaderType)
+                    {
+                    case GL_VERTEX_SHADER:
+                        std::clog << "Vertex "; break;
+                    case GL_FRAGMENT_SHADER:
+                        std::clog << "Fragment "; break;
+                    case GL_GEOMETRY_SHADER:
+                        std::clog << "Geometry "; break;
+                    case GL_COMPUTE_SHADER:
+                        std::clog << "Compute "; break;
+                    }
+                    std::clog << "Shader compilation failed!" << std::endl;
+                }
+
                 if (compileLog.length())
                 {
                     std::clog<<"\nShader Compile Log : \nStage : "<< (int)shaderType<<"\n" << compileLog << std::endl;
@@ -69,6 +85,7 @@ namespace Virtuoso
 
             for (const gl::Shader& sh: shaders)
             {
+                std::cout << "Shader id : " << sh.name() << std::endl;
                 rval.AttachShader(sh);
             }
 

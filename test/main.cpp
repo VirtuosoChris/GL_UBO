@@ -662,6 +662,9 @@ struct TestStruct5 : public std140::UBOStruct<>
 
     static void uboOffsetTest(GLint program)
     {
+
+        assert(glIsProgram(program));
+
         std140::Array<TestStruct5,2> test;
 
         std::cout << "size of TestStruct5 : " << sizeof(TestStruct5) << std::endl;
@@ -793,8 +796,8 @@ struct TestStruct6 : public std140::UBOStruct<>
 
 int main(void)
 {
-    if (!glfwInit())
-        return -1;
+   // if (!glfwInit())
+     //   return -1;
  
     glfw::Window::Hints hnts;
     glfw::Window wind(640, 480, hnts, "Simple");
@@ -819,6 +822,16 @@ int main(void)
 
     std::cout << "OpenGL Renderer : " << vendorStr << std::endl;
     {
+        //gl::Shader sh(GL_VERTEX_SHADER);
+       // Virtuoso::GL::Shader(GL_VERTEX_SHADER, bunnyVert);
+
+        /**Virtuoso::GL::Program(
+            {
+                Virtuoso::GL::Shader(GL_VERTEX_SHADER, bunnyVert),
+                Virtuoso::GL::Shader(GL_FRAGMENT_SHADER, bunnyFrag)
+            }
+        );
+        **/
         gl::Program bunnyProg(
             Virtuoso::GL::Program(
                 {
@@ -834,7 +847,7 @@ int main(void)
         std::cout << "Alignment of array aligned float " << alignof(std140::ArrayAlignment<GLfloat>::ArrayAlignedType) << std::endl;
 
         int tn = 1;
-        const int totalTests = 8;
+        const int totalTests = 11;
         std::cout << "\n\nTEST " << tn++ << " of " << totalTests << std::endl;
         TestStruct::uboOffsetTest(bunnyProg.name());
 
@@ -875,7 +888,7 @@ int main(void)
         std::cout << "\n\nTEST " << tn++ << " of " << totalTests << std::endl;
         TestDoubleStruct2::uboOffsetTest(bunnyProg.name());
     }
-    glfwTerminate();
+   // glfwTerminate();
 
     return 0;
 }
