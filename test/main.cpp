@@ -24,12 +24,15 @@
 
 #define GL_GLEXT_PROTOTYPES
 
-#include <glhpp/legacy/glcorearb.h>
-#include <glhpp/include/glhpp/OpenGL.hpp>
+//#include <glhpp/legacy/glcorearb.h>
 
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glfwpp/include/GLFW.hpp>
+
+#include <glhpp/include/glhpp/OpenGL.hpp>
+
 
 #include <iostream>
 #include <cmath>
@@ -41,6 +44,9 @@
 #undef VIRTUOSO_SHADERPROGRAMLIB_IMPLEMENTATION
 
 #include "../Std140.h"
+
+
+#include <GL/glew.h>
 
 bool verbose = false;
 
@@ -793,8 +799,15 @@ int main(void)
     glfw::Window::Hints hnts;
     glfw::Window wind(640, 480, hnts, "Simple");
 
+
     wind.MakeContextCurrent();
     
+    glewExperimental = true; // Needed in core profile
+    if (glewInit() != GLEW_OK) {
+        fprintf(stderr, "Failed to initialize GLEW\n");
+        return -1;
+    }
+
     /*while (wind)
     {
         wind.SwapBuffers();
