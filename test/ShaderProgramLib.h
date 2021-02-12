@@ -85,7 +85,6 @@ namespace Virtuoso
 
             for (const gl::Shader& sh: shaders)
             {
-                std::cout << "Shader id : " << sh.name() << std::endl;
                 rval.AttachShader(sh);
             }
 

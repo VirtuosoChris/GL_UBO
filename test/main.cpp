@@ -26,7 +26,7 @@
 
 //#include <glhpp/legacy/glcorearb.h>
 
-
+//#define GLHPP_STRICT_API
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glfwpp/include/GLFW.hpp>
@@ -800,7 +800,7 @@ int main(void)
      //   return -1;
  
     glfw::Window::Hints hnts;
-    glfw::Window wind(640, 480, hnts, "Simple");
+    glfw::Window wind(640, 480, hnts, "std140 Unit Test");
 
 
     wind.MakeContextCurrent();
