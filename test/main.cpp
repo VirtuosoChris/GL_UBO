@@ -26,8 +26,7 @@
 
 //#include <glhpp/legacy/glcorearb.h>
 
-//#define GLHPP_STRICT_API
-#include <GL/glew.h>
+#include <glad/include/glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glfwpp/include/GLFW.hpp>
 
@@ -46,7 +45,7 @@
 #include "../Std140.h"
 
 
-#include <GL/glew.h>
+//#include <GL/glew.h>
 
 bool verbose = false;
 
@@ -796,42 +795,21 @@ struct TestStruct6 : public std140::UBOStruct<>
 
 int main(void)
 {
-   // if (!glfwInit())
-     //   return -1;
- 
     glfw::Window::Hints hnts;
     glfw::Window wind(640, 480, hnts, "std140 Unit Test");
 
-
     wind.MakeContextCurrent();
-    
-    glewExperimental = true; // Needed in core profile
-    if (glewInit() != GLEW_OK) {
-        fprintf(stderr, "Failed to initialize GLEW\n");
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-
-    /*while (wind)
-    {
-        wind.SwapBuffers();
-        glfw::Events::Poll();
-    }*/
-
-   
+ 
     const GLubyte* vendorStr = glGetString(GL_RENDERER);
 
     std::cout << "OpenGL Renderer : " << vendorStr << std::endl;
     {
-        //gl::Shader sh(GL_VERTEX_SHADER);
-       // Virtuoso::GL::Shader(GL_VERTEX_SHADER, bunnyVert);
-
-        /**Virtuoso::GL::Program(
-            {
-                Virtuoso::GL::Shader(GL_VERTEX_SHADER, bunnyVert),
-                Virtuoso::GL::Shader(GL_FRAGMENT_SHADER, bunnyFrag)
-            }
-        );
-        **/
         gl::Program bunnyProg(
             Virtuoso::GL::Program(
                 {
@@ -888,7 +866,6 @@ int main(void)
         std::cout << "\n\nTEST " << tn++ << " of " << totalTests << std::endl;
         TestDoubleStruct2::uboOffsetTest(bunnyProg.name());
     }
-   // glfwTerminate();
 
     return 0;
 }

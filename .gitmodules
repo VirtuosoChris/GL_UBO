@@ -1,9 +1,8 @@
 [submodule "test/depends/glhpp"]
 	path = test/depends/glhpp
 	url = https://github.com/Steve132/glhpp
-[submodule "test/depends/glfw"]
-	path = test/depends/glfw
-	url = https://github.com/glfw/glfw
+	branch = master
 [submodule "test/depends/glfwpp"]
 	path = test/depends/glfwpp
 	url = https://github.com/Steve132/glfwpp
+	branch = master
