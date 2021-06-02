@@ -114,15 +114,10 @@ namespace std140
     template <typename TYPE, std::size_t ALIGN>
     struct ALIGN(ALIGN) ArrayAlignedStruct : public TYPE
     {
+        using TYPE::operator=;
+        using TYPE::TYPE;
     };
 
-
-    template <typename T>
-    struct ArrayAlignment
-    {
-        const static std::size_t AlignmentValue = std::max<std::size_t>(alignof(vec4), alignof(T));
-        typedef ArrayAlignedStruct<T,AlignmentValue> ArrayAlignedType;
-    };
 
     template<typename T, std::size_t align>
     struct AlignedPrimitiveType
@@ -175,6 +170,12 @@ namespace std140
     typedef ALIGN((VectorAlignment<GLuint, 3>::AlignmentValue)) Vector<GLuint, 3> uvec3;
     typedef ALIGN((VectorAlignment<GLuint, 4>::AlignmentValue)) Vector<GLuint, 4> uvec4;
 
+    template <typename T>
+    struct ArrayAlignment
+    {
+        const static std::size_t AlignmentValue = std::max<std::size_t>(alignof(vec4), alignof(T));
+        typedef ArrayAlignedStruct<T, AlignmentValue> ArrayAlignedType;
+    };
 
     template<>
     struct ArrayAlignment<std140::float32_t>
