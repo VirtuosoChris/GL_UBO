@@ -216,7 +216,7 @@ namespace std140
     template <typename P, int SZ>
     struct Array : public std::array<typename ArrayAlignment<P>::ArrayAlignedType, SZ> {};
 
-    template <typename P, int C, int R, bool columnMajor = true>
+    template <typename P, int COLS, int ROWS, bool columnMajor = true>
     struct Matrix : public Array< Vector<P, columnMajor ? R : C>, columnMajor ? C : R >
     {
     };
