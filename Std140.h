@@ -67,11 +67,12 @@ namespace std140
 
     // have these macros because the (portable) alignas can't be used on typedefs.
 
-#ifdef _WIN32
-    #define ALIGN(x) __declspec(align(x))
+#if defined(__GNUC__) || defined(__clang__)
+	#define ALIGN(x) __attribute__ ((aligned(x)))
+#elif defined(_MSC_VER)
+	#define ALIGN(x) __declspec(align(x))
 #else
-    // linux not tested
-    #define ALIGN(x) __declspec(align(x))
+#  error "Unknown compiler; can't define ALIGNOF"
 #endif
 
     template <typename P, int SZ>
